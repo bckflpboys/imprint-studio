@@ -2,6 +2,7 @@ import HeroSection from "@/components/HeroSection";
 import ServicesSection from "@/components/ServicesSection";
 import GallerySection from "@/components/GallerySection";
 import BookingSection from "@/components/BookingSection";
+import FloatingBooking from "@/components/FloatingBooking";
 
 export default function Home() {
   return (
@@ -10,6 +11,8 @@ export default function Home() {
       <ServicesSection />
       <BookingSection />
       <GallerySection />
+
+      <FloatingBooking />
     </main>
   );
 }
