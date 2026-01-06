@@ -20,13 +20,26 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "Services", href: "#services" },
+    { name: "Gallery", href: "#gallery" },
+    { name: "Book Now", href: "#booking" },
+    { name: "Contact", href: "/contact" },
+  ];
+
   return (
-    <nav className={`w-full py-4 px-4 lg:px-8 flex items-center justify-between fixed top-0 left-0 z-50 transition-all duration-300 bg-black/80 backdrop-blur-lg ${scrolled ? "shadow-lg" : ""}`}>
+    <nav className={`w-full py-4 px-4 lg:px-8 flex items-center justify-between fixed top-0 left-0 z-50 transition-all duration-300 ${scrolled ? "bg-black/90 backdrop-blur-lg shadow-lg" : "bg-transparent"}`}>
       <div className="flex items-center space-x-4">
-        <Link href="/" className="block h-10 lg:h-12 w-auto relative">
+        <Link href="/" className="block h-10 lg:h-12 w-auto relative flex items-center">
+          {/* Placeholder for Logo if image fails or is missing, but keeping Image component structure */}
+          <div className="text-white font-bold text-xl lg:text-2xl tracking-wider">
+            IMPRINT<span className="text-blue-500">STUDIO</span>
+          </div>
+          {/* Uncomment below when logo is available
           <Image
             src="/logo.png"
-            alt="Multi Media Interactive Directory"
+            alt="Imprint Media Studio"
             width={240}
             height={96}
             style={{ width: 'auto', height: '100%' }}
@@ -34,41 +47,20 @@ const Navbar = () => {
             priority
             unoptimized
           />
+          */}
         </Link>
       </div>
 
       {/* Desktop Navigation */}
-      <ul className="hidden lg:flex space-x-8 lg:space-x-10 text-white font-medium items-center">
-        <li>
-          <Link href="/" className="hover:text-blue-400 transition-colors duration-200 relative group">
-            Home
-            <span className="absolute bottom-[-2px] left-0 w-0 h-0.5 bg-blue-400 transition-all duration-200 group-hover:w-full"></span>
-          </Link>
-        </li>
-        <li className="flex items-center space-x-3">
-          <Link href="/listings">
-            <button className="px-4 lg:px-5 py-2.5 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105">
-              View Listings
-            </button>
-          </Link>
-          <Link href="/listings/new">
-            <button className="px-4 lg:px-5 py-2.5 rounded-lg bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold hover:from-green-600 hover:to-green-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105">
-              Create Listing
-            </button>
-          </Link>
-        </li>
-        <li>
-          <Link href="/blog" className="hover:text-blue-400 transition-colors duration-200 relative group">
-            Blog
-            <span className="absolute bottom-[-2px] left-0 w-0 h-0.5 bg-blue-400 transition-all duration-200 group-hover:w-full"></span>
-          </Link>
-        </li>
-        <li>
-          <Link href="/contact" className="hover:text-blue-400 transition-colors duration-200 relative group">
-            Contact
-            <span className="absolute bottom-[-2px] left-0 w-0 h-0.5 bg-blue-400 transition-all duration-200 group-hover:w-full"></span>
-          </Link>
-        </li>
+      <ul className="hidden lg:flex space-x-8 text-white font-medium items-center">
+        {navLinks.map((link) => (
+          <li key={link.name}>
+            <Link href={link.href} className="hover:text-blue-400 transition-colors duration-200 relative group">
+              {link.name}
+              <span className="absolute bottom-[-2px] left-0 w-0 h-0.5 bg-blue-400 transition-all duration-200 group-hover:w-full"></span>
+            </Link>
+          </li>
+        ))}
       </ul>
 
       {/* Desktop Auth Buttons */}
@@ -78,9 +70,6 @@ const Navbar = () => {
             <Link href="/dashboard">
               <button className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-purple-600 text-white font-semibold hover:from-purple-600 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg flex items-center space-x-2">
                 <span>Dashboard</span>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                </svg>
               </button>
             </Link>
             <ProfileCircle image={user.image || undefined} name={user.name || undefined} />
@@ -88,10 +77,10 @@ const Navbar = () => {
         ) : (
           <>
             <Link href="/auth?mode=signin">
-              <button className="px-5 py-2.5 rounded-lg border border-blue-400 text-blue-400 bg-white bg-opacity-90 hover:bg-opacity-100 hover:bg-blue-50 transition-all duration-200 font-semibold shadow-sm hover:shadow-md">Sign In</button>
+              <button className="px-5 py-2 rounded-lg border border-white/30 text-white hover:bg-white/10 transition-all duration-200 font-semibold">Sign In</button>
             </Link>
             <Link href="/auth?mode=signup">
-              <button className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105">Sign Up</button>
+              <button className="px-5 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg">Sign Up</button>
             </Link>
           </>
         )}
@@ -99,7 +88,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Button */}
       <button
-        className="lg:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5"
+        className="lg:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 z-50"
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
       >
         <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
@@ -108,79 +97,37 @@ const Navbar = () => {
       </button>
 
       {/* Mobile Menu */}
-      <div className={`lg:hidden fixed top-16 left-0 right-0 bg-black/95 backdrop-blur-lg transition-all duration-300 overflow-hidden ${mobileMenuOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'}`}>
-        <div className="flex flex-col space-y-4 p-6 max-h-[500px] overflow-y-auto">
-          <Link href="/" className="text-white font-medium hover:text-blue-400 transition-colors duration-200" onClick={() => setMobileMenuOpen(false)}>
-            Home
-          </Link>
-          <div className="space-y-3 w-full">
-            <Link href="/listings" className="flex justify-center" onClick={() => setMobileMenuOpen(false)}>
-              <button className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 w-full">
-                View Listings
-              </button>
+      <div className={`lg:hidden fixed top-0 left-0 right-0 bottom-0 bg-black/95 backdrop-blur-xl transition-all duration-300 flex flex-col justify-center items-center ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+        <div className="flex flex-col space-y-6 text-center">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className="text-2xl text-white font-medium hover:text-blue-400 transition-colors duration-200"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {link.name}
             </Link>
-            <Link href="/listings/new" className="flex justify-center" onClick={() => setMobileMenuOpen(false)}>
-              <button className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold hover:from-green-600 hover:to-green-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 w-full">
-                Create Listing
-              </button>
-            </Link>
-          </div>
-          <Link href="/blog" className="text-white font-medium hover:text-blue-400 transition-colors duration-200" onClick={() => setMobileMenuOpen(false)}>
-            Blog
-          </Link>
-          <Link href="/contact" className="text-white font-medium hover:text-blue-400 transition-colors duration-200" onClick={() => setMobileMenuOpen(false)}>
-            Contact
-          </Link>
+          ))}
 
-          {user && (
-            <>
-              <div className="border-t border-white/20 pt-4">
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-blue-200 flex items-center justify-center overflow-hidden border border-blue-400">
-                    {user.image ? (
-                      <Image src={user.image} alt="Profile" width={40} height={40} className="w-full h-full object-cover" />
-                    ) : (
-                      <span className="text-blue-700 font-bold text-lg">
-                        {user.name ? user.name[0].toUpperCase() : "?"}
-                      </span>
-                    )}
-                  </div>
-                  <span className="text-white font-medium">{user.name || "User"}</span>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Link href="/dashboard" className="text-white font-medium hover:text-blue-400 transition-colors duration-200 block" onClick={() => setMobileMenuOpen(false)}>
-                  Dashboard
-                </Link>
-                <Link href="/privacy-policy" className="text-white font-medium hover:text-blue-400 transition-colors duration-200 block" onClick={() => setMobileMenuOpen(false)}>
-                  Privacy Policy
-                </Link>
-                <Link href="/tos" className="text-white font-medium hover:text-blue-400 transition-colors duration-200 block" onClick={() => setMobileMenuOpen(false)}>
-                  Terms of Service
-                </Link>
-              </div>
-            </>
-          )}
-
-          <div className="flex flex-col space-y-3 pt-4 border-t border-white/20">
+          <div className="pt-8 flex flex-col space-y-4 w-64 mx-auto">
             {user ? (
               <button
                 onClick={() => {
                   signOut();
                   setMobileMenuOpen(false);
                 }}
-                className="px-5 py-2.5 rounded-lg border border-red-400 text-red-400 bg-white bg-opacity-90 hover:bg-opacity-100 hover:bg-red-50 transition-all duration-200 font-semibold shadow-sm hover:shadow-md w-full"
+                className="px-6 py-3 rounded-lg border border-red-500 text-red-500 hover:bg-red-500/10 transition-all duration-200 font-semibold"
               >
                 Sign Out
               </button>
             ) : (
               <>
                 <Link href="/auth?mode=signin" onClick={() => setMobileMenuOpen(false)}>
-                  <button className="px-5 py-2.5 rounded-lg border border-blue-400 text-blue-400 bg-white bg-opacity-90 hover:bg-opacity-100 hover:bg-blue-50 transition-all duration-200 font-semibold shadow-sm hover:shadow-md w-full">Sign In</button>
+                  <button className="w-full px-6 py-3 rounded-lg border border-white/30 text-white hover:bg-white/10 transition-all duration-200 font-semibold">Sign In</button>
                 </Link>
                 <Link href="/auth?mode=signup" onClick={() => setMobileMenuOpen(false)}>
-                  <button className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 w-full">Sign Up</button>
+                  <button className="w-full px-6 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-all duration-200 shadow-lg">Sign Up</button>
                 </Link>
               </>
             )}
