@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { FaCamera, FaVideo, FaFilm, FaPhotoVideo, FaCalendarAlt, FaClock, FaMapMarkerAlt, FaBuilding, FaTree, FaCheck } from "react-icons/fa";
+import React, { useState, useRef, useEffect } from "react";
+import { FaCamera, FaVideo, FaFilm, FaPhotoVideo, FaCalendarAlt, FaClock, FaMapMarkerAlt, FaBuilding, FaTree, FaCheck, FaGripHorizontal } from "react-icons/fa";
 
 const services = [
     { id: "photography", title: "Photo", icon: <FaCamera /> },
@@ -29,8 +29,75 @@ const FloatingBooking = () => {
         notes: ""
     });
 
-    const daysInMonth = 30;
-    const calendarDays = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+    // Draggable state
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const [isDragging, setIsDragging] = useState(false);
+    const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+    const cardRef = useRef<HTMLDivElement>(null);
+
+    // Initialize position on mount (bottom right default)
+    // Initialize position on mount (centered vertically on the right)
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const widgetHeight = 600; // Approximate height of the widget
+            const yPos = Math.max(24, (window.innerHeight - widgetHeight) / 2); // Center vertically, min 24px from top
+
+            setPosition({
+                x: window.innerWidth - 380, // 350px width + 30px margin
+                y: yPos
+            });
+        }
+    }, []);
+
+    const handleMouseDown = (e: React.MouseEvent) => {
+        if (cardRef.current) {
+            setIsDragging(true);
+            const rect = cardRef.current.getBoundingClientRect();
+            setDragOffset({
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            });
+        }
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+        if (isDragging) {
+            setPosition({
+                x: e.clientX - dragOffset.x,
+                y: e.clientY - dragOffset.y
+            });
+        }
+    };
+
+    const handleMouseUp = () => {
+        setIsDragging(false);
+    };
+
+    useEffect(() => {
+        if (isDragging) {
+            window.addEventListener('mousemove', handleMouseMove);
+            window.addEventListener('mouseup', handleMouseUp);
+        } else {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseup', handleMouseUp);
+        }
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseup', handleMouseUp);
+        };
+    }, [isDragging]);
+
+
+    // Calendar Logic
+    const today = new Date();
+    const currentMonth = today.toLocaleString('default', { month: 'long' });
+    const currentYear = today.getFullYear();
+    const currentDay = today.getDate();
+
+    const daysInCurrentMonth = new Date(currentYear, today.getMonth() + 1, 0).getDate();
+    const firstDayOfMonth = new Date(currentYear, today.getMonth(), 1).getDay(); // 0 = Sunday
+
+    const calendarDays = Array.from({ length: daysInCurrentMonth }, (_, i) => i + 1);
 
     const handleServiceSelect = (id: string) => setBookingData({ ...bookingData, service: id });
     const handleLocationSelect = (loc: string) => setBookingData({ ...bookingData, location: loc });
@@ -62,12 +129,29 @@ const FloatingBooking = () => {
     };
 
     return (
-        <div className="fixed right-6 top-1/2 -translate-y-1/2 w-[350px] max-h-[85vh] overflow-y-auto bg-gray-900/95 backdrop-blur-xl border border-gray-700 shadow-2xl rounded-2xl z-50 hidden lg:block scrollbar-hide">
+        <div
+            ref={cardRef}
+            style={{ left: `${position.x}px`, top: `${position.y}px` }}
+            className="fixed w-[350px] max-h-[85vh] overflow-y-auto bg-gray-900/95 backdrop-blur-xl border border-gray-700 shadow-2xl rounded-2xl z-50 hidden lg:block scrollbar-hide transition-shadow duration-300"
+        >
 
-            {/* Header */}
-            <div className="p-5 border-b border-gray-800 bg-gray-900/50 sticky top-0 z-10">
-                <h2 className="text-lg font-bold text-white">Quick Book</h2>
-                <p className="text-xs text-gray-400">Step {step} of 3</p>
+            {/* Header (Drag Handle) */}
+            <div
+                onMouseDown={handleMouseDown}
+                className="sticky top-0 z-20 bg-gray-900/95 backdrop-blur border-b border-gray-800 cursor-move select-none"
+            >
+                {/* Drag Bar */}
+                <div className="w-full h-8 bg-gray-800/50 flex items-center justify-center gap-2 group hover:bg-gray-800 transition-colors">
+                    <FaGripHorizontal className="text-xs text-gray-500 group-hover:text-white transition-colors" />
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500 group-hover:text-white transition-colors">Drag to Move</span>
+                    <FaGripHorizontal className="text-xs text-gray-500 group-hover:text-white transition-colors" />
+                </div>
+
+                {/* Title */}
+                <div className="px-5 py-3">
+                    <h2 className="text-lg font-bold text-white">Quick Book</h2>
+                    <p className="text-xs text-gray-400">Step {step} of 3</p>
+                </div>
             </div>
 
             {/* Content */}
@@ -79,20 +163,35 @@ const FloatingBooking = () => {
                         <div>
                             <h3 className="text-xs font-semibold text-blue-400 uppercase tracking-wider mb-3 flex items-center gap-2"><FaCalendarAlt /> Select Date</h3>
                             <div className="bg-gray-800 p-3 rounded-xl border border-gray-700">
-                                <div className="text-center mb-3 font-bold text-white text-sm">October 2025</div>
+                                <div className="text-center mb-3 font-bold text-white text-sm">{currentMonth} {currentYear}</div>
                                 <div className="grid grid-cols-7 gap-1 text-center text-[10px] text-gray-500 mb-2">
                                     <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
                                 </div>
                                 <div className="grid grid-cols-7 gap-1">
-                                    {calendarDays.map((day) => (
-                                        <button
-                                            key={day}
-                                            onClick={() => handleDateSelect(day)}
-                                            className={`aspect-square rounded-md flex items-center justify-center text-xs transition-all ${bookingData.date === day ? 'bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/50' : 'hover:bg-gray-700 text-gray-300'}`}
-                                        >
-                                            {day}
-                                        </button>
+                                    {/* Empty slots for start of month */}
+                                    {Array.from({ length: firstDayOfMonth }).map((_, i) => (
+                                        <div key={`empty-${i}`} />
                                     ))}
+
+                                    {calendarDays.map((day) => {
+                                        const isPast = day < currentDay;
+                                        return (
+                                            <button
+                                                key={day}
+                                                disabled={isPast}
+                                                onClick={() => handleDateSelect(day)}
+                                                className={`aspect-square rounded-md flex items-center justify-center text-xs transition-all 
+                          ${bookingData.date === day
+                                                        ? 'bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/50'
+                                                        : isPast
+                                                            ? 'text-gray-600 cursor-not-allowed'
+                                                            : 'hover:bg-gray-700 text-gray-300'
+                                                    }`}
+                                            >
+                                                {day}
+                                            </button>
+                                        );
+                                    })}
                                 </div>
                             </div>
                         </div>

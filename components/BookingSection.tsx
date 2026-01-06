@@ -29,9 +29,16 @@ const BookingSection = () => {
         notes: ""
     });
 
-    // Simple calendar generation (current month placeholder)
-    const daysInMonth = 30;
-    const calendarDays = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+    // Calendar Logic
+    const today = new Date();
+    const currentMonth = today.toLocaleString('default', { month: 'long' });
+    const currentYear = today.getFullYear();
+    const currentDay = today.getDate();
+
+    const daysInCurrentMonth = new Date(currentYear, today.getMonth() + 1, 0).getDate();
+    const firstDayOfMonth = new Date(currentYear, today.getMonth(), 1).getDay(); // 0 = Sunday
+
+    const calendarDays = Array.from({ length: daysInCurrentMonth }, (_, i) => i + 1);
 
     const handleServiceSelect = (id: string) => setBookingData({ ...bookingData, service: id });
     const handleLocationSelect = (loc: string) => setBookingData({ ...bookingData, location: loc });
@@ -94,20 +101,35 @@ const BookingSection = () => {
                             <div>
                                 <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2"><FaCalendarAlt className="text-blue-500" /> Select Date</h3>
                                 <div className="bg-gray-900 p-4 rounded-xl border border-gray-700">
-                                    <div className="text-center mb-4 font-bold text-lg">October 2025</div>
+                                    <div className="text-center mb-4 font-bold text-lg">{currentMonth} {currentYear}</div>
                                     <div className="grid grid-cols-7 gap-2 text-center text-sm text-gray-400 mb-2">
                                         <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
                                     </div>
                                     <div className="grid grid-cols-7 gap-2">
-                                        {calendarDays.map((day) => (
-                                            <button
-                                                key={day}
-                                                onClick={() => handleDateSelect(day)}
-                                                className={`aspect-square rounded-lg flex items-center justify-center transition-all ${bookingData.date === day ? 'bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/50' : 'hover:bg-gray-700 text-gray-300'}`}
-                                            >
-                                                {day}
-                                            </button>
+                                        {/* Empty slots for start of month */}
+                                        {Array.from({ length: firstDayOfMonth }).map((_, i) => (
+                                            <div key={`empty-${i}`} />
                                         ))}
+
+                                        {calendarDays.map((day) => {
+                                            const isPast = day < currentDay;
+                                            return (
+                                                <button
+                                                    key={day}
+                                                    disabled={isPast}
+                                                    onClick={() => handleDateSelect(day)}
+                                                    className={`aspect-square rounded-lg flex items-center justify-center transition-all 
+                                                        ${bookingData.date === day
+                                                            ? 'bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/50'
+                                                            : isPast
+                                                                ? 'text-gray-600 cursor-not-allowed'
+                                                                : 'hover:bg-gray-700 text-gray-300'
+                                                        }`}
+                                                >
+                                                    {day}
+                                                </button>
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             </div>
