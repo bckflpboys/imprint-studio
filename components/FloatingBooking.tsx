@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { FaCamera, FaVideo, FaFilm, FaPhotoVideo, FaCalendarAlt, FaClock, FaMapMarkerAlt, FaBuilding, FaTree, FaCheck, FaGripHorizontal } from "react-icons/fa";
+import { FaCamera, FaVideo, FaFilm, FaPhotoVideo, FaMicrophone, FaCalendarAlt, FaClock, FaMapMarkerAlt, FaBuilding, FaTree, FaCheck, FaGripHorizontal } from "react-icons/fa";
 
 const services = [
     { id: "photography", title: "Photo", icon: <FaCamera /> },
     { id: "videography", title: "Video", icon: <FaVideo /> },
     { id: "editing", title: "Edit", icon: <FaFilm /> },
     { id: "studio", title: "Studio", icon: <FaPhotoVideo /> },
+    { id: "podcast", title: "Podcast", icon: <FaMicrophone /> },
 ];
 
 const timeSlots = [

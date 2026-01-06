@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { FaCamera, FaVideo, FaFilm, FaPhotoVideo } from "react-icons/fa";
+import { FaCamera, FaVideo, FaFilm, FaPhotoVideo, FaMicrophone } from "react-icons/fa";
 
 const services = [
     {
@@ -31,6 +31,13 @@ const services = [
         icon: <FaPhotoVideo className="text-5xl text-green-600 group-hover:text-white transition-colors duration-300" />,
         gradient: "from-green-500 to-emerald-500",
         delay: "0.6s",
+    },
+    {
+        title: "Podcast Production",
+        description: "Professional audio recording and mixing for your podcasts. High-quality sound engineering to ensure your voice is heard clearly.",
+        icon: <FaMicrophone className="text-5xl text-orange-600 group-hover:text-white transition-colors duration-300" />,
+        gradient: "from-orange-500 to-red-500",
+        delay: "0.8s",
     },
 ];
 
