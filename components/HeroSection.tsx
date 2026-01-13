@@ -17,7 +17,7 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center w-full max-w-5xl px-4 text-center">
         <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight drop-shadow-2xl animate-fade-in-up">
-          IMPRINT <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">MEDIA STUDIO</span>
+          STUDIO <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-neon-blue">NEON</span>
         </h1>
 
         <p className="text-xl md:text-2xl mb-10 text-gray-200 max-w-3xl drop-shadow-lg font-light">
@@ -26,7 +26,7 @@ const HeroSection = () => {
 
         <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
           <Link href="#booking">
-            <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-bold rounded-full hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-blue-500/50 transform hover:-translate-y-1 w-full sm:w-auto">
+            <button className="px-8 py-4 bg-primary-500 text-grey-900 text-lg font-bold rounded-full hover:bg-primary-400 hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(250,204,21,0.5)] w-full sm:w-auto">
               Book a Session
             </button>
           </Link>

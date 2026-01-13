@@ -264,10 +264,10 @@ const BusinessMap: React.FC<BusinessMapProps> = ({ listings, hoveredListingId })
   return (
     <div className={`
       bg-white rounded-lg shadow-lg overflow-hidden
-      ${isPIP ? 'fixed bottom-4 right-4 w-80 h-64 z-50 border-2 border-blue-500' : 'sticky top-24'}
+      ${isPIP ? 'fixed bottom-4 right-4 w-80 h-64 z-50 border-2 border-primary-500' : 'sticky top-24'}
       transition-all duration-300
     `}>
-      <div className="p-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+      <div className="p-3 bg-gradient-to-r from-primary-500 to-primary-600 text-grey-900">
         <div className="flex justify-between items-center">
           <div>
             <h3 className={`font-semibold ${isPIP ? 'text-sm' : 'text-lg'}`}>Business Locations</h3>
@@ -276,7 +276,7 @@ const BusinessMap: React.FC<BusinessMapProps> = ({ listings, hoveredListingId })
           {isPIP && (
             <button
               onClick={() => setIsPIP(false)}
-              className="text-white hover:bg-white hover:bg-opacity-20 rounded p-1 transition-colors"
+              className="text-grey-900 hover:bg-white hover:bg-opacity-20 rounded p-1 transition-colors"
               title="Dismiss map"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -290,7 +290,7 @@ const BusinessMap: React.FC<BusinessMapProps> = ({ listings, hoveredListingId })
         {!isLoaded ? (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
             <div className="text-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-2"></div>
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mx-auto mb-2"></div>
               <p className="text-sm text-gray-600">Loading map...</p>
             </div>
           </div>
@@ -306,7 +306,7 @@ const BusinessMap: React.FC<BusinessMapProps> = ({ listings, hoveredListingId })
             <span>Available</span>
           </div>
           <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-blue-600 rounded-full border border-blue-700"></div>
+            <div className="w-2 h-2 bg-primary-500 rounded-full border border-primary-600"></div>
             <span>Hovered</span>
           </div>
         </div>
@@ -315,7 +315,7 @@ const BusinessMap: React.FC<BusinessMapProps> = ({ listings, hoveredListingId })
         {!isPIP && (
           <button
             onClick={() => setIsPIP(true)}
-            className="absolute bottom-4 right-4 bg-blue-600 text-white rounded-full p-2 hover:bg-blue-700 transition-colors shadow-lg"
+            className="absolute bottom-4 right-4 bg-primary-500 text-grey-900 rounded-full p-2 hover:bg-primary-400 transition-colors shadow-lg"
             title="Picture-in-Picture mode"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

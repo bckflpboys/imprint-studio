@@ -7,8 +7,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata: Metadata = {
-  title: "Next.js Template",
-  description: "A modern Next.js 14 template with TypeScript and Tailwind CSS",
+  title: "Studio Neon",
+  description: "Premier photography and videography services.",
 };
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
-          <ToastContainer 
+          <ToastContainer
             position="top-right"
             autoClose={5000}
             hideProgressBar={false}

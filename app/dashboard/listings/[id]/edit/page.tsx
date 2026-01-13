@@ -307,14 +307,14 @@ export default function EditListingPage({ params }: { params: { id: string } }) 
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-grey-50 pt-24 pb-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-5xl mx-auto">
                 {/* Header Section */}
                 <div className="text-center mb-12">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full mb-4">
-                        <FaPlus className="text-white text-2xl" />
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-500 rounded-full mb-4 shadow-lg shadow-primary-500/30">
+                        <FaPlus className="text-grey-900 text-2xl" />
                     </div>
-                    <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-3">
+                    <h1 className="text-4xl sm:text-5xl font-bold text-grey-900 mb-3">
                         Edit Business Listing
                     </h1>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto">

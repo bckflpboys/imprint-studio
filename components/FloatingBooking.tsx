@@ -141,10 +141,10 @@ const FloatingBooking = () => {
                 className="sticky top-0 z-20 bg-gray-900/95 backdrop-blur border-b border-gray-800 cursor-move select-none"
             >
                 {/* Drag Bar */}
-                <div className="w-full h-8 bg-gray-800/50 flex items-center justify-center gap-2 group hover:bg-gray-800 transition-colors">
-                    <FaGripHorizontal className="text-xs text-gray-500 group-hover:text-white transition-colors" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500 group-hover:text-white transition-colors">Drag to Move</span>
-                    <FaGripHorizontal className="text-xs text-gray-500 group-hover:text-white transition-colors" />
+                <div className="w-full h-8 bg-grey-800/50 flex items-center justify-center gap-2 group hover:bg-grey-800 transition-colors">
+                    <FaGripHorizontal className="text-xs text-gray-500 group-hover:text-primary-400 transition-colors" />
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500 group-hover:text-primary-400 transition-colors">Drag to Move</span>
+                    <FaGripHorizontal className="text-xs text-gray-500 group-hover:text-primary-400 transition-colors" />
                 </div>
 
                 {/* Title */}
@@ -161,8 +161,8 @@ const FloatingBooking = () => {
                 {step === 1 && (
                     <div className="space-y-6 animate-fade-in">
                         <div>
-                            <h3 className="text-xs font-semibold text-blue-400 uppercase tracking-wider mb-3 flex items-center gap-2"><FaCalendarAlt /> Select Date</h3>
-                            <div className="bg-gray-800 p-3 rounded-xl border border-gray-700">
+                            <h3 className="text-xs font-semibold text-primary-400 uppercase tracking-wider mb-3 flex items-center gap-2"><FaCalendarAlt /> Select Date</h3>
+                            <div className="bg-grey-800 p-3 rounded-xl border border-grey-700">
                                 <div className="text-center mb-3 font-bold text-white text-sm">{currentMonth} {currentYear}</div>
                                 <div className="grid grid-cols-7 gap-1 text-center text-[10px] text-gray-500 mb-2">
                                     <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
@@ -182,10 +182,10 @@ const FloatingBooking = () => {
                                                 onClick={() => handleDateSelect(day)}
                                                 className={`aspect-square rounded-md flex items-center justify-center text-xs transition-all 
                           ${bookingData.date === day
-                                                        ? 'bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/50'
+                                                        ? 'bg-primary-500 text-grey-900 font-bold shadow-lg shadow-primary-500/50'
                                                         : isPast
                                                             ? 'text-gray-600 cursor-not-allowed'
-                                                            : 'hover:bg-gray-700 text-gray-300'
+                                                            : 'hover:bg-grey-700 text-gray-300'
                                                     }`}
                                             >
                                                 {day}
@@ -197,13 +197,13 @@ const FloatingBooking = () => {
                         </div>
 
                         <div>
-                            <h3 className="text-xs font-semibold text-purple-400 uppercase tracking-wider mb-3 flex items-center gap-2"><FaClock /> Select Time</h3>
+                            <h3 className="text-xs font-semibold text-primary-400 uppercase tracking-wider mb-3 flex items-center gap-2"><FaClock /> Select Time</h3>
                             <div className="grid grid-cols-2 gap-2">
                                 {timeSlots.map((time) => (
                                     <button
                                         key={time}
                                         onClick={() => handleTimeSelect(time)}
-                                        className={`py-2 px-2 rounded-lg border text-xs transition-all ${bookingData.time === time ? 'border-purple-500 bg-purple-500/20 text-white' : 'border-gray-700 hover:border-gray-500 text-gray-400'}`}
+                                        className={`py-2 px-2 rounded-lg border text-xs transition-all ${bookingData.time === time ? 'border-primary-500 bg-primary-500/20 text-primary-400' : 'border-grey-700 hover:border-grey-500 text-gray-400'}`}
                                     >
                                         {time}
                                     </button>
@@ -217,13 +217,13 @@ const FloatingBooking = () => {
                 {step === 2 && (
                     <div className="space-y-6 animate-fade-in">
                         <div>
-                            <h3 className="text-xs font-semibold text-purple-400 uppercase tracking-wider mb-3 flex items-center gap-2"><FaMapMarkerAlt /> Location</h3>
+                            <h3 className="text-xs font-semibold text-primary-400 uppercase tracking-wider mb-3 flex items-center gap-2"><FaMapMarkerAlt /> Location</h3>
                             <div className="grid grid-cols-1 gap-3">
                                 <button
                                     onClick={() => handleLocationSelect('studio')}
-                                    className={`p-3 rounded-xl border-2 flex items-center gap-3 transition-all duration-300 ${bookingData.location === 'studio' ? 'border-purple-500 bg-purple-500/20 text-white' : 'border-gray-600 hover:border-gray-500 text-gray-400 hover:text-white'}`}
+                                    className={`p-3 rounded-xl border-2 flex items-center gap-3 transition-all duration-300 ${bookingData.location === 'studio' ? 'border-primary-500 bg-primary-500/20 text-white' : 'border-grey-600 hover:border-grey-500 text-gray-400 hover:text-white'}`}
                                 >
-                                    <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-purple-400 shrink-0">
+                                    <div className="w-10 h-10 rounded-full bg-grey-800 flex items-center justify-center text-primary-400 shrink-0">
                                         <FaBuilding />
                                     </div>
                                     <div className="text-left">
@@ -233,9 +233,9 @@ const FloatingBooking = () => {
                                 </button>
                                 <button
                                     onClick={() => handleLocationSelect('outdoor')}
-                                    className={`p-3 rounded-xl border-2 flex items-center gap-3 transition-all duration-300 ${bookingData.location === 'outdoor' ? 'border-green-500 bg-green-500/20 text-white' : 'border-gray-600 hover:border-gray-500 text-gray-400 hover:text-white'}`}
+                                    className={`p-3 rounded-xl border-2 flex items-center gap-3 transition-all duration-300 ${bookingData.location === 'outdoor' ? 'border-neon-blue bg-neon-blue/20 text-white' : 'border-grey-600 hover:border-grey-500 text-gray-400 hover:text-white'}`}
                                 >
-                                    <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-green-400 shrink-0">
+                                    <div className="w-10 h-10 rounded-full bg-grey-800 flex items-center justify-center text-neon-blue shrink-0">
                                         <FaTree />
                                     </div>
                                     <div className="text-left">
@@ -247,13 +247,13 @@ const FloatingBooking = () => {
                         </div>
 
                         <div>
-                            <h3 className="text-xs font-semibold text-blue-400 uppercase tracking-wider mb-3 flex items-center gap-2"><FaCamera /> Service</h3>
+                            <h3 className="text-xs font-semibold text-primary-400 uppercase tracking-wider mb-3 flex items-center gap-2"><FaCamera /> Service</h3>
                             <div className="grid grid-cols-2 gap-2">
                                 {services.map((s) => (
                                     <button
                                         key={s.id}
                                         onClick={() => handleServiceSelect(s.id)}
-                                        className={`p-3 rounded-xl border-2 flex flex-col items-center gap-2 transition-all duration-300 ${bookingData.service === s.id ? 'border-blue-500 bg-blue-500/20 text-white' : 'border-gray-600 hover:border-gray-500 text-gray-400 hover:text-white'}`}
+                                        className={`p-3 rounded-xl border-2 flex flex-col items-center gap-2 transition-all duration-300 ${bookingData.service === s.id ? 'border-primary-500 bg-primary-500/20 text-white' : 'border-grey-600 hover:border-grey-500 text-gray-400 hover:text-white'}`}
                                     >
                                         <div className="text-xl text-gray-300">{s.icon}</div>
                                         <span className="font-medium text-xs">{s.title}</span>
@@ -267,7 +267,7 @@ const FloatingBooking = () => {
                 {/* Step 3: Details & Confirm */}
                 {step === 3 && (
                     <div className="animate-fade-in space-y-4">
-                        <h3 className="text-xs font-semibold text-green-400 uppercase tracking-wider mb-3 flex items-center gap-2"><FaCheck /> Final Details</h3>
+                        <h3 className="text-xs font-semibold text-neon-blue uppercase tracking-wider mb-3 flex items-center gap-2"><FaCheck /> Final Details</h3>
 
                         <div className="space-y-3">
                             <div>
@@ -322,12 +322,12 @@ const FloatingBooking = () => {
                             (step === 1 && (!bookingData.date || !bookingData.time)) ||
                             (step === 2 && (!bookingData.service || !bookingData.location))
                         }
-                        className="px-6 py-2 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-600/30 text-xs"
+                        className="px-6 py-2 rounded-lg bg-primary-500 text-grey-900 font-bold hover:bg-primary-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-primary-500/30 text-xs"
                     >
                         Next
                     </button>
                 ) : (
-                    <button onClick={handleSubmit} className="px-6 py-2 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold hover:from-green-600 hover:to-emerald-700 transition-all shadow-lg shadow-green-500/30 transform hover:scale-105 text-xs">
+                    <button onClick={handleSubmit} className="px-6 py-2 rounded-lg bg-gradient-to-r from-primary-500 to-primary-400 text-grey-900 font-bold hover:from-primary-400 hover:to-primary-300 transition-all shadow-lg shadow-primary-500/30 transform hover:scale-105 text-xs">
                         Confirm
                     </button>
                 )}

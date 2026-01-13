@@ -42,7 +42,7 @@ const GallerySection = () => {
                 </div>
 
                 <div className="mt-12 text-center">
-                    <button className="px-8 py-3 bg-transparent border-2 border-gray-900 text-gray-900 font-semibold rounded-lg hover:bg-gray-900 hover:text-white transition-all duration-300">
+                    <button className="px-8 py-3 bg-transparent border-2 border-primary-500 text-grey-900 font-semibold rounded-lg hover:bg-primary-500 hover:text-grey-900 transition-all duration-300">
                         View Full Gallery
                     </button>
                 </div>

@@ -73,23 +73,23 @@ const BookingSection = () => {
     return (
         <section id="booking" className="py-20 bg-gray-900 text-white relative overflow-hidden">
             {/* Background decoration */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+            <div className="absolute top-0 right-0 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-neon-blue/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl md:text-5xl font-bold mb-4">Book Your Session</h2>
-                    <p className="text-gray-400 text-lg">Follow the steps to reserve your spot with Imprint Media Studio.</p>
+                    <p className="text-gray-400 text-lg">Follow the steps to reserve your spot with Studio Neon.</p>
                 </div>
 
                 {/* Progress Bar */}
                 <div className="flex justify-center mb-12">
                     <div className="flex items-center space-x-4">
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-colors ${step >= 1 ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-400'}`}>1</div>
-                        <div className={`w-16 h-1 bg-gray-700 ${step >= 2 ? 'bg-blue-600' : ''}`} />
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-colors ${step >= 2 ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-400'}`}>2</div>
-                        <div className={`w-16 h-1 bg-gray-700 ${step >= 3 ? 'bg-blue-600' : ''}`} />
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-colors ${step >= 3 ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-400'}`}>3</div>
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-colors ${step >= 1 ? 'bg-primary-500 text-grey-900' : 'bg-grey-700 text-gray-400'}`}>1</div>
+                        <div className={`w-16 h-1 bg-grey-700 ${step >= 2 ? 'bg-primary-500' : ''}`} />
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-colors ${step >= 2 ? 'bg-primary-500 text-grey-900' : 'bg-grey-700 text-gray-400'}`}>2</div>
+                        <div className={`w-16 h-1 bg-grey-700 ${step >= 3 ? 'bg-primary-500' : ''}`} />
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-colors ${step >= 3 ? 'bg-primary-500 text-grey-900' : 'bg-grey-700 text-gray-400'}`}>3</div>
                     </div>
                 </div>
 
@@ -99,8 +99,8 @@ const BookingSection = () => {
                     {step === 1 && (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 animate-fade-in">
                             <div>
-                                <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2"><FaCalendarAlt className="text-blue-500" /> Select Date</h3>
-                                <div className="bg-gray-900 p-4 rounded-xl border border-gray-700">
+                                <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2"><FaCalendarAlt className="text-primary-500" /> Select Date</h3>
+                                <div className="bg-grey-900 p-4 rounded-xl border border-grey-700">
                                     <div className="text-center mb-4 font-bold text-lg">{currentMonth} {currentYear}</div>
                                     <div className="grid grid-cols-7 gap-2 text-center text-sm text-gray-400 mb-2">
                                         <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
@@ -120,10 +120,10 @@ const BookingSection = () => {
                                                     onClick={() => handleDateSelect(day)}
                                                     className={`aspect-square rounded-lg flex items-center justify-center transition-all 
                                                         ${bookingData.date === day
-                                                            ? 'bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/50'
+                                                            ? 'bg-primary-500 text-grey-900 font-bold shadow-lg shadow-primary-500/50'
                                                             : isPast
                                                                 ? 'text-gray-600 cursor-not-allowed'
-                                                                : 'hover:bg-gray-700 text-gray-300'
+                                                                : 'hover:bg-grey-700 text-gray-300'
                                                         }`}
                                                 >
                                                     {day}
@@ -135,13 +135,13 @@ const BookingSection = () => {
                             </div>
 
                             <div>
-                                <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2"><FaClock className="text-purple-500" /> Select Time</h3>
+                                <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2"><FaClock className="text-primary-500" /> Select Time</h3>
                                 <div className="grid grid-cols-2 gap-3">
                                     {timeSlots.map((time) => (
                                         <button
                                             key={time}
                                             onClick={() => handleTimeSelect(time)}
-                                            className={`py-3 px-4 rounded-lg border transition-all ${bookingData.time === time ? 'border-purple-500 bg-purple-500/20 text-white' : 'border-gray-700 hover:border-gray-500 text-gray-400'}`}
+                                            className={`py-3 px-4 rounded-lg border transition-all ${bookingData.time === time ? 'border-primary-500 bg-primary-500/20 text-primary-400' : 'border-grey-700 hover:border-grey-500 text-gray-400'}`}
                                         >
                                             {time}
                                         </button>
@@ -155,11 +155,11 @@ const BookingSection = () => {
                     {step === 2 && (
                         <div className="space-y-8 animate-fade-in">
                             <div>
-                                <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2"><FaMapMarkerAlt className="text-purple-500" /> Select Location</h3>
+                                <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2"><FaMapMarkerAlt className="text-primary-500" /> Select Location</h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <button
                                         onClick={() => handleLocationSelect('studio')}
-                                        className={`p-6 rounded-xl border-2 flex items-center justify-center gap-4 transition-all duration-300 ${bookingData.location === 'studio' ? 'border-purple-500 bg-purple-500/20 text-white' : 'border-gray-600 hover:border-gray-500 text-gray-400 hover:text-white'}`}
+                                        className={`p-6 rounded-xl border-2 flex items-center justify-center gap-4 transition-all duration-300 ${bookingData.location === 'studio' ? 'border-primary-500 bg-primary-500/20 text-white' : 'border-grey-600 hover:border-grey-500 text-gray-400 hover:text-white'}`}
                                     >
                                         <FaBuilding className="text-3xl" />
                                         <div className="text-left">
@@ -169,7 +169,7 @@ const BookingSection = () => {
                                     </button>
                                     <button
                                         onClick={() => handleLocationSelect('outdoor')}
-                                        className={`p-6 rounded-xl border-2 flex items-center justify-center gap-4 transition-all duration-300 ${bookingData.location === 'outdoor' ? 'border-green-500 bg-green-500/20 text-white' : 'border-gray-600 hover:border-gray-500 text-gray-400 hover:text-white'}`}
+                                        className={`p-6 rounded-xl border-2 flex items-center justify-center gap-4 transition-all duration-300 ${bookingData.location === 'outdoor' ? 'border-neon-blue bg-neon-blue/20 text-white' : 'border-grey-600 hover:border-grey-500 text-gray-400 hover:text-white'}`}
                                     >
                                         <FaTree className="text-3xl" />
                                         <div className="text-left">
@@ -181,13 +181,13 @@ const BookingSection = () => {
                             </div>
 
                             <div>
-                                <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2"><FaCamera className="text-blue-500" /> Select Service</h3>
+                                <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2"><FaCamera className="text-primary-500" /> Select Service</h3>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                     {services.map((s) => (
                                         <button
                                             key={s.id}
                                             onClick={() => handleServiceSelect(s.id)}
-                                            className={`p-6 rounded-xl border-2 flex flex-col items-center gap-3 transition-all duration-300 ${bookingData.service === s.id ? 'border-blue-500 bg-blue-500/20 text-white' : 'border-gray-600 hover:border-gray-500 text-gray-400 hover:text-white'}`}
+                                            className={`p-6 rounded-xl border-2 flex flex-col items-center gap-3 transition-all duration-300 ${bookingData.service === s.id ? 'border-primary-500 bg-primary-500/20 text-white' : 'border-grey-600 hover:border-grey-500 text-gray-400 hover:text-white'}`}
                                         >
                                             <div className="text-3xl">{s.icon}</div>
                                             <span className="font-medium">{s.title}</span>
@@ -201,7 +201,7 @@ const BookingSection = () => {
                     {/* Step 3: Details & Confirm */}
                     {step === 3 && (
                         <div className="animate-fade-in">
-                            <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2"><FaCheck className="text-green-500" /> Final Details</h3>
+                            <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2"><FaCheck className="text-neon-blue" /> Final Details</h3>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                                 <div className="space-y-4">
@@ -266,12 +266,12 @@ const BookingSection = () => {
                                     (step === 1 && (!bookingData.date || !bookingData.time)) ||
                                     (step === 2 && (!bookingData.service || !bookingData.location))
                                 }
-                                className="px-8 py-3 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-600/30"
+                                className="px-8 py-3 rounded-lg bg-primary-500 text-grey-900 font-bold hover:bg-primary-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-primary-500/30"
                             >
                                 Next Step
                             </button>
                         ) : (
-                            <button onClick={handleSubmit} className="px-8 py-3 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold hover:from-green-600 hover:to-emerald-700 transition-all shadow-lg shadow-green-500/30 transform hover:scale-105">
+                            <button onClick={handleSubmit} className="px-8 py-3 rounded-lg bg-gradient-to-r from-primary-500 to-primary-400 text-grey-900 font-bold hover:from-primary-400 hover:to-primary-300 transition-all shadow-lg shadow-primary-500/30 transform hover:scale-105">
                                 Confirm Booking
                             </button>
                         )}

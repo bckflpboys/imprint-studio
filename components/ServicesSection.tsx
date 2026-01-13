@@ -72,17 +72,17 @@ const ServicesSection = () => {
 
             {/* Dynamic Background Elements */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-                <div className="absolute top-0 left-1/4 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
-                <div className="absolute top-0 right-1/4 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
-                <div className="absolute -bottom-8 left-1/3 w-72 h-72 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" />
+                <div className="absolute top-0 left-1/4 w-72 h-72 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
+                <div className="absolute top-0 right-1/4 w-72 h-72 bg-grey-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
+                <div className="absolute -bottom-8 left-1/3 w-72 h-72 bg-primary-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" />
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-20">
-                    <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">
-                        Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Services</span>
+                    <h2 className="text-4xl md:text-5xl font-extrabold text-grey-900 mb-6 tracking-tight">
+                        Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-neon-blue">Services</span>
                     </h2>
-                    <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+                    <p className="text-xl text-grey-600 max-w-3xl mx-auto font-light leading-relaxed">
                         We offer a wide range of media services tailored to your needs. From capturing the perfect shot to producing cinematic videos, we bring your creative vision to reality.
                     </p>
                 </div>
@@ -91,22 +91,22 @@ const ServicesSection = () => {
                     {services.map((service, index) => (
                         <div
                             key={index}
-                            className="group relative bg-white border-2 border-gray-400 p-8 rounded-2xl shadow-lg hover:shadow-2xl hover:border-transparent transition-all duration-500 animate-float"
+                            className="group relative bg-white border-2 border-grey-200 p-8 rounded-2xl shadow-lg hover:shadow-2xl hover:border-primary-500 transition-all duration-500 animate-float"
                             style={{ animationDelay: service.delay }}
                         >
                             {/* Hover Gradient Background */}
-                            <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl -z-10`} />
+                            <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl -z-10`} />
 
                             <div className="relative z-10 flex flex-col items-center text-center h-full">
-                                <div className="mb-8 p-4 bg-gray-50 rounded-2xl group-hover:bg-white/20 transition-colors duration-300 shadow-sm group-hover:shadow-inner">
-                                    {service.icon}
+                                <div className="mb-8 p-4 bg-grey-50 rounded-2xl group-hover:bg-primary-500/10 transition-colors duration-300 shadow-sm group-hover:shadow-inner">
+                                    {React.cloneElement(service.icon as React.ReactElement, { className: "text-5xl text-grey-700 group-hover:text-primary-500 transition-colors duration-300" })}
                                 </div>
 
-                                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-white transition-colors duration-300">
+                                <h3 className="text-2xl font-bold text-grey-900 mb-4 group-hover:text-primary-600 transition-colors duration-300">
                                     {service.title}
                                 </h3>
 
-                                <p className="text-gray-600 leading-relaxed group-hover:text-white/90 transition-colors duration-300">
+                                <p className="text-grey-600 leading-relaxed group-hover:text-grey-800 transition-colors duration-300">
                                     {service.description}
                                 </p>
                             </div>
