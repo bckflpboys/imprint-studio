@@ -14,7 +14,7 @@ export default function Footer() {
             </div>
           </div>
           <p className="text-gray-400 text-sm leading-relaxed">
-            Imprint Media Studio is a premier photography and videography service provider. We specialize in capturing life's most precious moments with creativity and passion.
+            Imprint Media Studio is a premier photography and videography service provider. We specialize in capturing life&apos;s most precious moments with creativity and passion.
           </p>
         </div>
 

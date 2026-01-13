@@ -19,6 +19,7 @@ const BusinessMap: React.FC<BusinessMapProps> = ({ listings, hoveredListingId })
   const mapRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<any>(null);
   const [markers, setMarkers] = useState<any[]>([]);
+  const markersRef = useRef<any[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isPIP, setIsPIP] = useState(false);
 
@@ -100,7 +101,7 @@ const BusinessMap: React.FC<BusinessMapProps> = ({ listings, hoveredListingId })
     if (!map || !isLoaded || !window.L) return;
 
     // Clear existing markers
-    markers.forEach(marker => marker.remove());
+    markersRef.current.forEach(marker => marker.remove());
 
     const newMarkers: any[] = [];
 
@@ -191,6 +192,7 @@ const BusinessMap: React.FC<BusinessMapProps> = ({ listings, hoveredListingId })
     });
 
     setMarkers(newMarkers);
+    markersRef.current = newMarkers;
 
     // Fit map to show all markers
     if (newMarkers.length > 0) {

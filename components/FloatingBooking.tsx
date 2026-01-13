@@ -60,18 +60,18 @@ const FloatingBooking = () => {
         }
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = React.useCallback((e: MouseEvent) => {
         if (isDragging) {
             setPosition({
                 x: e.clientX - dragOffset.x,
                 y: e.clientY - dragOffset.y
             });
         }
-    };
+    }, [isDragging, dragOffset]);
 
-    const handleMouseUp = () => {
+    const handleMouseUp = React.useCallback(() => {
         setIsDragging(false);
-    };
+    }, []);
 
     useEffect(() => {
         if (isDragging) {
@@ -85,7 +85,7 @@ const FloatingBooking = () => {
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('mouseup', handleMouseUp);
         };
-    }, [isDragging]);
+    }, [isDragging, handleMouseMove, handleMouseUp]);
 
 
     // Calendar Logic

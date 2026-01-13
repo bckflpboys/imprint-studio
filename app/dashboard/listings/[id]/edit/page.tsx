@@ -72,13 +72,7 @@ export default function EditListingPage({ params }: { params: { id: string } }) 
         }
     }, [status, router]);
 
-    useEffect(() => {
-        if (status === 'authenticated') {
-            fetchListing();
-        }
-    }, [status]);
-
-    const fetchListing = async () => {
+    const fetchListing = React.useCallback(async () => {
         try {
             setIsLoading(true);
             const response = await fetch(`/api/dashboard/listings/${params.id}`);
@@ -123,7 +117,15 @@ export default function EditListingPage({ params }: { params: { id: string } }) 
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [params.id]);
+
+    useEffect(() => {
+        if (status === 'authenticated') {
+            fetchListing();
+        }
+    }, [status, fetchListing]);
+
+
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value, type } = e.target as HTMLInputElement;
